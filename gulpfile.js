@@ -22,10 +22,7 @@ var config = {
         html: './src/*.html'
     },
     dist: {
-        root: './dist/',
-        js: './dist/js/',
-        css: './dist/css/',
-        html: './dist/'
+        root: './dist/'       
     }
 }
 
@@ -37,17 +34,6 @@ var config = {
     del([config.dist.root], done);
   });
 */
-
-/*
- * minimize html files
- */
-gulp.task('html:dist', function () {
-    return gulp.src(config.src.html)
-        .pipe($.plumber())
-        .pipe($.htmlclean())
-        .pipe(gulp.dest(config.dist.html));
-});
-
 
 /*
  * Add vendor prefixes to CSS rules, bundle, minimize, and generate source map for the final css file
@@ -63,22 +49,21 @@ gulp.task('css:dist', function () {
         .pipe($.concat('style.min.css'))
         .pipe($.cleanCss())
         .pipe($.sourcemaps.write("./"))
-        .pipe(gulp.dest(config.dist.css));
+        .pipe(gulp.dest(config.dist.root));
 });
 
 
 /*
- * transpile  js files, bundle, uglify, and add source map to them
+ * transpile  js files, uglify, and add source map to them
  */
 gulp.task('js:dist', function () {
     return gulp.src(config.src.js)
         .pipe($.plumber())
         .pipe($.sourcemaps.init())
         .pipe($.babel())
-        .pipe($.concat('common.min.js'))
         .pipe($.uglify())
         .pipe($.sourcemaps.write("./"))
-        .pipe(gulp.dest(config.dist.js));
+        .pipe(gulp.dest(config.dist.root));
 });
 
 
@@ -86,13 +71,13 @@ gulp.task('js:dist', function () {
  * monitor any change to re-run the tasks
  */
 gulp.task('watch', function () {
-    gulp.watch([config.src.html], ['html:dist']).on('change',browserSync.reload);
+    gulp.watch([config.src.html]).on('change',browserSync.reload);
     gulp.watch([config.src.css], ['css:dist']);
     gulp.watch([config.src.js], ['js:dist']); 
     
 });
 
-gulp.task('copy:dist', ['html:dist', 'css:dist', 'js:dist']);
+gulp.task('copy:dist', ['css:dist', 'js:dist']);
 
 
 //Set a default tasks

@@ -20,10 +20,8 @@
     "gulp-babel": "^7.0.1",
     "gulp-clean-css": "^3.9.4",
     "gulp-concat": "^2.6.1",
-    "gulp-htmlclean": "^2.7.22",
     "gulp-load-plugins": "^1.5.0",
     "gulp-plumber": "^1.2.0",
-    "gulp-rename": "^1.2.3",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0"
   },
