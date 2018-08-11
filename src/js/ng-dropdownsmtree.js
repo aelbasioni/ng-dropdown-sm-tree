@@ -23,17 +23,17 @@ angular.module('ngDropdownsmtree', [])
         // the markup this directive generates
         template: (iElement, iAttrs) => {
 
-            const html = `<div class="btn-group" style="width:100%">
+            const html = `<div class="btn-group ng-dropdownsmtree-css">
                             <button type="button" class="btn dropdown-toggle ${iAttrs.controlClass}" data-ng-class="{\'disabled\':disabled == true}"   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                <i class="glyphicon glyphicon-triangle-bottom pull-right" style="margin-top:3px"></i>
+                                <i class="glyphicon glyphicon-triangle-bottom pull-right"></i>
                                  {{selectedsubjectdesc}}
                             </button>            
-                            <ul class="dropdown-menu custom-dropdown-menu" >
+                            <ul class="dropdown-menu ng-dropdownsmtree-inner-dropdown-menu" >
                                 <li ><input type="text" placeholder="${iAttrs.searchPlaceholder}" class="form-control"  ng-change="highlightContainers()" data-ng-model="SearchSubjectFLTR" data-ng-init="SearchSubjectFLTR =\'\'" /></li>
                                 <li data-ng-repeat="item in parentArray" data-src="{{item[\'${iAttrs.parentArrayItemIdField}\']}}">
                                     <span  onclick="event.stopPropagation();" data-ng-click="showSecondLevel($event)" ><span class="glyphicon glyphicon-plus"></span> {{item[parentArrayItemDisplayField]}}</span>
-                                    <div class="content" style="margin-left: 14px; overflow: hidden">
-                                    <ul style="padding-left: 15px" >
+                                    <div class="content">
+                                        <ul>
                                             <li data-ng-repeat="sb in childArrays | filter: {${iAttrs.childArraysItemParentId}: item[\'${iAttrs.parentArrayItemIdField}\']}: true | filter:{${iAttrs.childArraysItemSearchField}:SearchSubjectFLTR} ">
                                                 <a href="" data-ng-click="setselecteditem(sb)"> {{sb[childArraysItemDisplayField] }}</a>
                                             </li>

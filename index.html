@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>ng-Dropdownsmtree Demo</title>
 
 
     <!-- Minified CSS -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="src/css/styles.css">
-    <!--<link rel="stylesheet" href="dist/styles.min.css">-->
+    <!--<link rel="stylesheet" href="src/css/styles.css">-->
+    <link rel="stylesheet" href="dist/styles.min.css">
 
     <!-- Optional IE8 Support -->
     <!--[if lt IE 9]>
@@ -34,13 +34,13 @@
 
                     <ng-Dropdownsmtree ng-model="selectedSubject" parent-array="departments" parent-array-item-id-field="ID" parent-array-item-display-field="Description"
                         child-arrays="departmentSubjects" child-arrays-item-parent-id="DepartmentID" child-arrays-item-display-field="Description" child-arrays-item-search-field="Description"
-                        control-class="form-control brown-control" search-placeholder="Search ..." title-placeholder="Select Subject"   disabled="false"
+                        control-class="form-control bordered-control" search-placeholder="Search ..." title-placeholder="Select Subject"   disabled="false"
                         ></ng-Dropdownsmtree>
                     
                    
                     <h2>The selected subject is:</h2>
                     <p>
-                        {{selectedSubject.Description}}
+                        {{(selectedSubject.Description)?selectedSubject.Description:'Nothing selected yet'}}
                     </p>    
                 </div>
 

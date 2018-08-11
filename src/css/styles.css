@@ -1,77 +1,12 @@
-
-.custom-dropdown-menu {
-    width: 100%;
-    font-size: 12px;
-    max-height: 300px;
-    overflow-y: auto;
+.ng-dropdownsmtree-css{
+    width:100%
 }
 
-.custom-dropdown-menu .status{
-    color: #D0D1D8; font-size: 0.8em;cursor:default !important;
+.ng-dropdownsmtree-css .dropdown-toggle > .glyphicon{
+    margin-top:3px;
 }
 
-.custom-dropdown-menu .transparent{
-    color: transparent !important;
-}
-
-.custom-dropdown-menu .element-div {
-    cursor:pointer;
-    border-bottom: 1px solid #fafafa;
-    margin-top: 5px;
-    font-size: 0.8em;
-    padding-bottom: 0.2em;
-    background-color: transparent;
-
-}
-
-
-
-.custom-dropdown-menu .element-div:hover {
-    color: #3d84bc;
-}
-
-.custom-dropdown-menu .element-div img {
-    height: 2.4em;
-    width: 2.4em;
-}
-
-    .custom-dropdown-menu .content {
-        display: none;
-        overflow-x: hidden;
-        max-height: 160px;
-        overflow-y: auto;
-        margin-left: 15px;
-    }
-
-    .custom-dropdown-menu > li {
-        padding: 3px 15px;
-    }
-
-        .custom-dropdown-menu > li > span {
-            color: #828282;
-            cursor: pointer;
-        }
-
-            .custom-dropdown-menu > li > span > .glyphicon {
-                margin-right: 5px;
-                font-size: 9px;
-            }
-
-.brown-control {
-    width: 100%;
-    border: 1px solid #CCC;
-    text-align: left;
-    border-radius: 4px;
-}
-
-.treedll-control  {
-    width: 100%;
-    border: 1px solid #CCC;
-    text-align: left;
-    border-radius: 4px;
-}
-
-.has-data {
+.ng-dropdownsmtree-css .has-data {
     color: #ff6a00 !important;
     -webkit-transition: color 0.2s ease-in;
     -moz-transition: color 0.2s ease-in;
@@ -80,7 +15,7 @@
     transition: color 0.2s ease-in;
 }
 
-.disabled {
+.ng-dropdownsmtree-css .disabled {
     cursor: not-allowed;
     filter: alpha(opacity=65);
     -webkit-box-shadow: none;
@@ -88,9 +23,46 @@
     opacity: .65;
 }
 
-.list-title {
-    cursor:default !important;
-    color:#D0D1D7 !important;
-
+.ng-dropdownsmtree-inner-dropdown-menu {
+    width: 100%;
+    font-size: 12px;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
+
+    .ng-dropdownsmtree-inner-dropdown-menu .content {
+        display: none;
+        overflow-x: hidden;
+        max-height: 160px;
+        overflow-y: auto;
+        margin-left: 15px;
+    }
+
+
+    .ng-dropdownsmtree-inner-dropdown-menu .content > ul {
+        padding-left: 15px;
+    }
+
+
+    .ng-dropdownsmtree-inner-dropdown-menu > li {
+        padding: 3px 15px;
+    }
+
+
+        .ng-dropdownsmtree-inner-dropdown-menu > li > span {
+            color: #828282;
+            cursor: pointer;
+        }
+
+
+            .ng-dropdownsmtree-inner-dropdown-menu > li > span > .glyphicon {
+                margin-right: 5px;
+                font-size: 9px;
+            }
+
+
+.bordered-control {
+    border: 1px solid #CCC;
+    text-align: left;   
+}
