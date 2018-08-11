@@ -23,41 +23,49 @@
 
 <body>
     <div class="container">
-        <h1>Example of dropdown tree</h1>
-        <p class="text-muted">
-            This control extends the functionality of bootstrap dropdown control
-        </p>
-        <div ng-controller="demoController">
-          
-            <ng-Dropdownsmtree ng-model="SelectedSubject" parent-array="departments" parent-array-item-id-field="ID" parent-array-item-display-field="Description" child-arrays="departmentsubjects" child-arrays-item-parent-id="DepartmentID" child-arrays-item-display-field="Description"  control-class="brown-control"  search-placeholder="Search ..." highlightedelementclass="has-data" disabled="false" ng-change="SetSelectedSubject1()"></div>
 
+        <h1>Dropdown small tree</h1>
+        <div class="row">
+            <div class="col-sm-6">
+                <p class="text-muted">
+                    This control extends the functionality of bootstrap dropdown control. It drops down a tree and it's useful for small trees
+                </p>
+                <div ng-controller="demoController">
+
+                    <ng-Dropdownsmtree ng-model="selectedSubject" parent-array="departments" parent-array-item-id-field="ID" parent-array-item-display-field="Description"
+                        child-arrays="departmentSubjects" child-arrays-item-parent-id="DepartmentID" child-arrays-item-display-field="Description" child-arrays-item-search-field="Description"
+                        control-class="brown-control" search-placeholder="Search ..." title-placeholder="Select Subject"   disabled="false"
+                        ></ng-Dropdownsmtree>
+                    
+                   
+                    <h2>The selected subject is:</h2>
+                    <p>
+                        {{selectedSubject.Description}}
+                    </p>    
+                </div>
+
+            </div>
         </div>
     </div>
+    </div>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
 
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-    <!-- Minified JavaScript -->
+    <!-- Minified bootstrap -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    
-    
+
+
     <script>
         var app = angular.module('testApp', []);
         app.controller('demoController', function ($scope) {
 
-            $scope.departments = [{ "ID": 1000, "Description": "IT"}, { "ID": 1001, "Description": "HR"}, { "ID": 1004, "Description": "Finance"}, { "ID": 1006, "Description": "account"}, { "ID": null, "Description": "Others"}];
-            $scope.departmentsubjects = [{ "SubjectID": 1008, "Description": "web application", "DepartmentID": null }, { "SubjectID": 1009, "Description": "Mobile application", "DepartmentID": 1000 }, { "SubjectID": 1013, "Description": "Technical Support", "DepartmentID": 1001 }, { "SubjectID": 1019, "Description": "ERP Integration", "DepartmentID": 1000 }, { "SubjectID": 1033, "Description": "Windows Application", "DepartmentID": null }, { "SubjectID": 1056, "Description": "Communication system", "DepartmentID": null }, { "SubjectID": 1061, "Description": "aaaaa333", "DepartmentID": null }];
-            
-            //$scope.SelectedSubject = "Choose subject ...";
-          
-            $scope.SetSelectedSubject1 = function () {
+            $scope.departments = [{ "ID": 1000, "Description": "IT" }, { "ID": 1001, "Description": "HR" }, { "ID": 1004, "Description": "Finance" }, { "ID": 1006, "Description": "account" }, { "ID": null, "Description": "Others" }];
+            $scope.departmentSubjects = [{ "SubjectID": 1008, "Description": "web application", "DepartmentID": null }, { "SubjectID": 1009, "Description": "Mobile application", "DepartmentID": 1000 }, { "SubjectID": 1013, "Description": "Technical Support", "DepartmentID": 1001 }, { "SubjectID": 1019, "Description": "ERP Integration", "DepartmentID": 1000 }, { "SubjectID": 1033, "Description": "Windows Application", "DepartmentID": null }, { "SubjectID": 1056, "Description": "Communication system", "DepartmentID": null }, { "SubjectID": 1061, "Description": "aaaaa333", "DepartmentID": null }];
 
-                alert($scope.SelectedSubject.Description);
-            };
-
-         
         });
 
     </script>

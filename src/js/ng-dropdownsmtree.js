@@ -11,9 +11,10 @@ app.directive('ngDropdownsmtree', function ($filter) {
             parentArray: '=',
             childArraysItemDisplayField: '@',
             parentArrayItemDisplayField: '@',
+            childArraysItemSearchField: '@',
             disabled: '=',
-            selectedsubjectdesc: '@'
-
+            titlePlaceholder: '@'
+            //selectedsubjectdesc: '@'
         },
 
 
@@ -28,10 +29,10 @@ app.directive('ngDropdownsmtree', function ($filter) {
                             '<ul class="dropdown-menu custom-dropdown-menu" >' +
                                 '<li ><input type="text" placeholder="' + iAttrs.searchPlaceholder + '" class="form-control"  oninput="highlightContainers(this)" data-ng-model="SearchSubjectFLTR" data-ng-init="SearchSubjectFLTR =\'\'" /></li>' +
                                 '<li data-ng-repeat="item in parentArray" data-src="{{item[\''+iAttrs.parentArrayItemIdField+'\']}}">' +
-                                    '<span  onclick="event.stopPropagation();" data-ng-click="showSecondLevel(item,$event)" ><span class="glyphicon glyphicon-plus"></span> {{item[parentArrayItemDisplayField]}}</span>' +
+                                    '<span  onclick="event.stopPropagation();" data-ng-click="showSecondLevel($event)" ><span class="glyphicon glyphicon-plus"></span> {{item[parentArrayItemDisplayField]}}</span>' +
                                     '<div class="content" style="margin-left: 14px; overflow: hidden">' +
                                     '<ul style="padding-left: 15px" >' +
-                                            '<li data-ng-repeat="sb in childArrays | filter: {'+iAttrs.childArraysItemParentId+': item[\''+ iAttrs.parentArrayItemIdField+'\']}: true | filter:{'+iAttrs.childArraysItemDisplayField+':SearchSubjectFLTR} ">' +
+                                            '<li data-ng-repeat="sb in childArrays | filter: {'+iAttrs.childArraysItemParentId+': item[\''+ iAttrs.parentArrayItemIdField+'\']}: true | filter:{'+iAttrs.childArraysItemSearchField+':SearchSubjectFLTR} ">' +
                                                 '<a href="" data-ng-click="setselecteditem(sb)"> {{sb[childArraysItemDisplayField] }}</a>' +
                                             '</li>' +
                                         '</ul>' +
@@ -52,7 +53,7 @@ app.directive('ngDropdownsmtree', function ($filter) {
                 if(ctrl.$viewValue)
                   scope.selectedsubjectdesc = ctrl.$viewValue.Description;
                 else
-                  scope.selectedsubjectdesc = "select item ..."
+                  scope.selectedsubjectdesc = scope.titlePlaceholder;
             };
       
             highlightContainers = function (event) {
@@ -68,30 +69,19 @@ app.directive('ngDropdownsmtree', function ($filter) {
 
                 //height the new elements that contains the new search test
                 if (val.length > 0) {
-                    var _arr = $filter('filter', scope.childArraysItemDisplayField)(scope.childArrays, val);
+                    var _arr = $filter('filter', scope.childArraysItemSearchField)(scope.childArrays, val);
                     console.log("_arr1",_arr)
                     for (var i = 0; i < _arr.length; i++) {
                         if (_arr[i][iAttrs.childArraysItemParentId] === null)
                             elm.find("[data-src=''] >span").addClass('has-data');                        
                         else
                             elm.find("[data-src="+_arr[i][iAttrs.childArraysItemParentId]+"] >span").addClass('has-data');
-                        
-                        //elm.find("[data-src=\'p_"+_arr[i][iAttrs.childArraysItemParentId]+"\'] > span").addClass(iAttrs.highlightedelementclass);
-                        /*if (_arr[i][iAttrs.childArraysItemParentId] == null)
-                            $("#" + _divID + " > span").addClass(iAttrs.highlightedelementclass);
-                        else
-                            $("#" + _divID + _arr[i].DepartmentID + " > span").addClass(iAttrs.highlightedelementclass);*/
                     }
                 }
             };
 
-            scope.showSecondLevel = function (dept, event) {
+            scope.showSecondLevel = function (event) {
 
-                //var indexID = dept.DepartmentID;
-                //if (indexID == null)
-                //    indexID = "";
-                //alert
-                //var clickedItem = angular.element((event.currentTarget || event.srcElement)).closest('li');
                 var clickedItem = $(event.currentTarget || event.srcElement).closest('li');
                 clickedItem.find('.content').slideToggle(500);
                 clickedItem.find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus');
