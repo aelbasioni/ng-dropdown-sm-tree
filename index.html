@@ -59,8 +59,10 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
+    <script src="dist/ng-dropdownsmtree.min.js"></script>
+    <!--<script src="src/js/ng-dropdownsmtree.js"></script>-->
     <script>
-        var app = angular.module('testApp', []);
+        var app = angular.module('testApp', ['ngDropdownsmtree']);
         app.controller('demoController', function ($scope) {
 
             $scope.departments = [{ "ID": 1000, "Description": "IT" }, { "ID": 1001, "Description": "HR" }, { "ID": 1004, "Description": "Finance" }, { "ID": 1006, "Description": "account" }, { "ID": null, "Description": "Others" }];
@@ -69,8 +71,7 @@
         });
 
     </script>
-    <script src="src/js/ng-dropdownsmtree.js"></script>
-    <!--<script src="dist/ng-dropdownsmtree.min.js"></script>-->
+   
 </body>
 
 </html>
