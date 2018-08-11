@@ -28,9 +28,8 @@
             This control extends the functionality of bootstrap dropdown control
         </p>
         <div ng-controller="demoController">
-            {{message}} - {{SelectedSubject}}
-
-            <ng-Dropdownsmtree ng-model="SelectedSubject" parent-array="departments" parent-array-item-id="ID" child-arrays="departmentsubjects" child-arrays-item-parent-id="DepartmentID"  control-class="brown-control"  search-placeholder="Search ..." highlightedelementclass="has-data" disabled="false" ng-change="SetSelectedSubject1()"></div>
+          
+            <ng-Dropdownsmtree ng-model="SelectedSubject" parent-array="departments" parent-array-item-id-field="ID" parent-array-item-display-field="Description" child-arrays="departmentsubjects" child-arrays-item-parent-id="DepartmentID" child-arrays-item-display-field="Description"  control-class="brown-control"  search-placeholder="Search ..." highlightedelementclass="has-data" disabled="false" ng-change="SetSelectedSubject1()"></div>
 
         </div>
     </div>
@@ -48,20 +47,17 @@
         var app = angular.module('testApp', []);
         app.controller('demoController', function ($scope) {
 
-            $scope.departments = [{ "ID": 1000, "Description": "IT", "FilterType": "0", "ShowInTicket": 1 }, { "ID": 1001, "Description": "HR", "FilterType": "0", "ShowInTicket": 1 }, { "ID": 1004, "Description": "Finance", "FilterType": "0", "ShowInTicket": 0 }, { "ID": 1006, "Description": "account", "FilterType": "0", "ShowInTicket": 1 }, { "ID": null, "Description": "Unknown", "FilterType": "subjects", "ShowInTicket": 1 }, { "ID": null, "Description": "Unknown", "FilterType": "users", "ShowInTicket": 1 }];
-            $scope.departmentsubjects = [{ "SubjectID": 1008, "Description": "web application", "DepartmentID": null }, { "SubjectID": 1009, "Description": "Mobile application", "DepartmentID": 1000 }, { "SubjectID": 1013, "Description": "Technical Support", "DepartmentID": 1001 }, { "SubjectID": 1019, "Description": "ERP Integration", "DepartmentID": 1000 }, { "SubjectID": 1033, "Description": "Windows Application", "DepartmentID": null }, { "SubjectID": 1056, "Description": "hg", "DepartmentID": null }, { "SubjectID": 1061, "Description": "aaaaa333", "DepartmentID": null }, { "SubjectID": 1084, "Description": "bb", "DepartmentID": 1001 }, { "SubjectID": 1093, "Description": "test", "DepartmentID": 1004 }, { "SubjectID": 1095, "Description": "ss", "DepartmentID": 1004 }];
+            $scope.departments = [{ "ID": 1000, "Description": "IT"}, { "ID": 1001, "Description": "HR"}, { "ID": 1004, "Description": "Finance"}, { "ID": 1006, "Description": "account"}, { "ID": null, "Description": "Others"}];
+            $scope.departmentsubjects = [{ "SubjectID": 1008, "Description": "web application", "DepartmentID": null }, { "SubjectID": 1009, "Description": "Mobile application", "DepartmentID": 1000 }, { "SubjectID": 1013, "Description": "Technical Support", "DepartmentID": 1001 }, { "SubjectID": 1019, "Description": "ERP Integration", "DepartmentID": 1000 }, { "SubjectID": 1033, "Description": "Windows Application", "DepartmentID": null }, { "SubjectID": 1056, "Description": "Communication system", "DepartmentID": null }, { "SubjectID": 1061, "Description": "aaaaa333", "DepartmentID": null }];
             
             //$scope.SelectedSubject = "Choose subject ...";
-            //$scope.ProgressValue1 = 25;
-
+          
             $scope.SetSelectedSubject1 = function () {
 
                 alert($scope.SelectedSubject.Description);
             };
 
-            //const ss = "test";
-            $scope.message = "hello ${ss}";
-
+         
         });
 
     </script>

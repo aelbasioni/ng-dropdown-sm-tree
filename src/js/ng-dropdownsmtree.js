@@ -7,8 +7,10 @@ app.directive('ngDropdownsmtree', function ($filter) {
         replace:true,
         // declare the directive scope as private 
         scope: {
-            childArrays: '=',
+            childArrays: '=',            
             parentArray: '=',
+            childArraysItemDisplayField: '@',
+            parentArrayItemDisplayField: '@',
             disabled: '=',
             selectedsubjectdesc: '@'
 
@@ -24,13 +26,13 @@ app.directive('ngDropdownsmtree', function ($filter) {
                                  '{{selectedsubjectdesc}}' +
                             '</button>            ' +
                             '<ul class="dropdown-menu custom-dropdown-menu" >' +
-                                '<li ><input type="text" placeholder="' + iAttrs.searchPlaceholder + '" class="form-control" data-ng-change="highlightContainers($event)" data-ng-model="SearchSubjectFLTR" data-ng-init="SearchSubjectFLTR =\'\'" /></li>' +
-                                '<li data-ng-repeat="item in parentArray">' +
-                                    '<span  onclick="event.stopPropagation();" data-ng-click="showSecondLevel(item,$event)" ><span class="glyphicon glyphicon-plus"></span> {{item.Description}}</span>' +
+                                '<li ><input type="text" placeholder="' + iAttrs.searchPlaceholder + '" class="form-control"  oninput="highlightContainers(this)" data-ng-model="SearchSubjectFLTR" data-ng-init="SearchSubjectFLTR =\'\'" /></li>' +
+                                '<li data-ng-repeat="item in parentArray" data-src="{{item[\''+iAttrs.parentArrayItemIdField+'\']}}">' +
+                                    '<span  onclick="event.stopPropagation();" data-ng-click="showSecondLevel(item,$event)" ><span class="glyphicon glyphicon-plus"></span> {{item[parentArrayItemDisplayField]}}</span>' +
                                     '<div class="content" style="margin-left: 14px; overflow: hidden">' +
                                     '<ul style="padding-left: 15px" >' +
-                                            '<li data-ng-repeat="sb in childArrays | filter: {'+iAttrs.childArraysItemParentId+': item[\''+ iAttrs.parentArrayItemId+'\']}: true | filter:{Description:SearchSubjectFLTR} ">' +
-                                                '<a href="" data-ng-click="setselecteditem(sb)"> {{sb.Description }}</a>' +
+                                            '<li data-ng-repeat="sb in childArrays | filter: {'+iAttrs.childArraysItemParentId+': item[\''+ iAttrs.parentArrayItemIdField+'\']}: true | filter:{'+iAttrs.childArraysItemDisplayField+':SearchSubjectFLTR} ">' +
+                                                '<a href="" data-ng-click="setselecteditem(sb)"> {{sb[childArraysItemDisplayField] }}</a>' +
                                             '</li>' +
                                         '</ul>' +
                                     '</div>' +
@@ -53,28 +55,32 @@ app.directive('ngDropdownsmtree', function ($filter) {
                   scope.selectedsubjectdesc = "select item ..."
             };
       
-            function doRemoveHighlightContainers(elm) {
+            highlightContainers = function (event) {
 
-                try {
-                    for (var i = 0; i < scope.parentArray.length; i++) {
-                        elm.find("span").removeClass(iAttrs.highlightedelementclass);                       
-                    }
+                if(!event)
+                    return;
+                
+                var val = $(event).val();
+                
+                //remove previous heighlights
+                var elm = $(event).closest('ul');
+                elm.find(" >li > span.has-data").removeClass('has-data');
 
-                } catch (e) { }
-            };
-            scope.highlightContainers = function (event) {
-
-
-                var elm = $(event.currentTarget || event.srcElement);
-                doRemoveHighlightContainers(elm);
-
-                if (scope.SearchSubjectFLTR.length > 0) {
-                    var _arr = $filter('filter', 'Description')(scope.childArrays, scope.SearchSubjectFLTR);
+                //height the new elements that contains the new search test
+                if (val.length > 0) {
+                    var _arr = $filter('filter', scope.childArraysItemDisplayField)(scope.childArrays, val);
+                    console.log("_arr1",_arr)
                     for (var i = 0; i < _arr.length; i++) {
-                        if (_arr[i][DepartmentID] == null)
+                        if (_arr[i][iAttrs.childArraysItemParentId] === null)
+                            elm.find("[data-src=''] >span").addClass('has-data');                        
+                        else
+                            elm.find("[data-src="+_arr[i][iAttrs.childArraysItemParentId]+"] >span").addClass('has-data');
+                        
+                        //elm.find("[data-src=\'p_"+_arr[i][iAttrs.childArraysItemParentId]+"\'] > span").addClass(iAttrs.highlightedelementclass);
+                        /*if (_arr[i][iAttrs.childArraysItemParentId] == null)
                             $("#" + _divID + " > span").addClass(iAttrs.highlightedelementclass);
                         else
-                            $("#" + _divID + _arr[i].DepartmentID + " > span").addClass(iAttrs.highlightedelementclass);
+                            $("#" + _divID + _arr[i].DepartmentID + " > span").addClass(iAttrs.highlightedelementclass);*/
                     }
                 }
             };
