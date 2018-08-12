@@ -25,6 +25,20 @@
     <div class="container">
 
         <h1>Dropdown small tree</h1>
+        <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  Dropdown
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </div>
+
         <div class="row">
             <div class="col-sm-6">
                 <p class="text-muted">
@@ -34,7 +48,7 @@
 
                     <ng-Dropdownsmtree ng-model="selectedSubject" parent-array="departments" parent-array-item-id-field="ID" parent-array-item-display-field="Description"
                         child-arrays="departmentSubjects" child-arrays-item-parent-id="DepartmentID" child-arrays-item-display-field="Description" child-arrays-item-search-field="Description"
-                        control-class="form-control bordered-control" search-placeholder="Search ..." title-placeholder="Select Subject"   disabled="false"
+                        control-class="form-control bordered-control" search-placeholder="Search" title-placeholder="Select Subject"   disabled="false"
                         ></ng-Dropdownsmtree>
                     
                    
@@ -65,8 +79,8 @@
         var app = angular.module('testApp', ['ngDropdownsmtree']);
         app.controller('demoController', function ($scope) {
 
-            $scope.departments = [{ "ID": 1000, "Description": "IT" }, { "ID": 1001, "Description": "HR" }, { "ID": 1004, "Description": "Finance" }, { "ID": 1006, "Description": "account" }, { "ID": null, "Description": "Others" }];
-            $scope.departmentSubjects = [{ "SubjectID": 1008, "Description": "web application", "DepartmentID": null }, { "SubjectID": 1009, "Description": "Mobile application", "DepartmentID": 1000 }, { "SubjectID": 1013, "Description": "Technical Support", "DepartmentID": 1001 }, { "SubjectID": 1019, "Description": "ERP Integration", "DepartmentID": 1000 }, { "SubjectID": 1033, "Description": "Windows Application", "DepartmentID": null }, { "SubjectID": 1056, "Description": "Communication system", "DepartmentID": null }, { "SubjectID": 1061, "Description": "aaaaa333", "DepartmentID": null }];
+            $scope.departments = [{ "ID": 1000, "Description": "IT" }, { "ID": 1001, "Description": "HR" }, { "ID": 1004, "Description": "Finance" }, { "ID": 1006, "Description": "Account" }, { "ID": null, "Description": "Others" }];
+            $scope.departmentSubjects = [{ "SubjectID": 1008, "Description": "web application", "DepartmentID": 1000 }, { "SubjectID": 1009, "Description": "Mobile application", "DepartmentID": 1000 }, { "SubjectID": 1013, "Description": "Technical Support", "DepartmentID": 1001 }, { "SubjectID": 1019, "Description": "ERP Integration", "DepartmentID": 1000 }, { "SubjectID": 1033, "Description": "Security", "DepartmentID": null }, { "SubjectID": 1056, "Description": "Communication system", "DepartmentID": 1000 }, { "SubjectID": 1061, "Description": "General Services", "DepartmentID": null }];
 
         });
 

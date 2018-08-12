@@ -16,7 +16,6 @@ angular.module('ngDropdownsmtree', [])
             childArraysItemSearchField: '@',
             disabled: '=',
             titlePlaceholder: '@'
-            //selectedsubjectdesc: '@'
         },
 
 
@@ -25,20 +24,18 @@ angular.module('ngDropdownsmtree', [])
 
             const html = `<div class="btn-group ng-dropdownsmtree-css">
                             <button type="button" class="btn dropdown-toggle ${iAttrs.controlClass}" data-ng-class="{\'disabled\':disabled == true}"   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                <i class="glyphicon glyphicon-triangle-bottom pull-right"></i>
+                                <i class="glyphicon glyphicon-triangle-bottom pull-right" aria-hidden="true"></i>
                                  {{selectedsubjectdesc}}
                             </button>            
-                            <ul class="dropdown-menu ng-dropdownsmtree-inner-dropdown-menu" >
-                                <li ><input type="text" placeholder="${iAttrs.searchPlaceholder}" class="form-control"  ng-change="highlightContainers()" data-ng-model="SearchSubjectFLTR" data-ng-init="SearchSubjectFLTR =\'\'" /></li>
-                                <li data-ng-repeat="item in parentArray" data-src="{{item[\'${iAttrs.parentArrayItemIdField}\']}}">
-                                    <span  onclick="event.stopPropagation();" data-ng-click="showSecondLevel($event)" ><span class="glyphicon glyphicon-plus"></span> {{item[parentArrayItemDisplayField]}}</span>
-                                    <div class="content">
-                                        <ul>
-                                            <li data-ng-repeat="sb in childArrays | filter: {${iAttrs.childArraysItemParentId}: item[\'${iAttrs.parentArrayItemIdField}\']}: true | filter:{${iAttrs.childArraysItemSearchField}:SearchSubjectFLTR} ">
-                                                <a href="" data-ng-click="setselecteditem(sb)"> {{sb[childArraysItemDisplayField] }}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                            <ul class="dropdown-menu ng-dropdownsmtree-inner-dropdown-menu" role="tree">
+                                <li ><input type="text" placeholder="${iAttrs.searchPlaceholder}" aria-label="${iAttrs.searchPlaceholder}" class="form-control"  ng-change="highlightContainers()" data-ng-model="SearchSubjectFLTR" data-ng-init="SearchSubjectFLTR =\'\'" /></li>
+                                <li data-ng-repeat="item in parentArray" onclick="event.stopPropagation();" data-ng-click="showSecondLevel($event)" data-src="{{item[\'${iAttrs.parentArrayItemIdField}\']}}" data-ng-keydown="onEnter($event)" role="treeitem" tabindex="0" aria-expanded="false">
+                                    <span><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{item[parentArrayItemDisplayField]}}</span>
+                                    <ul role="group" class="content">
+                                        <li data-ng-repeat="sb in childArrays | filter: {${iAttrs.childArraysItemParentId}: item[\'${iAttrs.parentArrayItemIdField}\']}: true | filter:{${iAttrs.childArraysItemSearchField}:SearchSubjectFLTR} ">
+                                            <a href="" data-ng-click="setselecteditem(sb)" role="treeitem" tabindex="-1"> {{sb[childArraysItemDisplayField] }}</a>
+                                        </li>
+                                    </ul>                                    
                                 </li>
 
                             </ul>
@@ -79,11 +76,23 @@ angular.module('ngDropdownsmtree', [])
             scope.showSecondLevel = (event) => {
 
                 const clickedItem = $(event.currentTarget || event.srcElement).closest('li');
-                clickedItem.find('.content').slideToggle(500);
+                const content = clickedItem.find('.content');
+                if(content.css("display") === "none")
+                    clickedItem.attr("aria-expanded","false");
+                else
+                    clickedItem.attr("aria-expanded","true");
+                
+                content.slideToggle(500);
                 clickedItem.find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus');
 
             };
 
+            scope.onEnter = (event) =>{
+                if(event.keyCode === 13){
+                    scope.showSecondLevel(event);
+                }
+            };
+        
             scope.setselecteditem = (sb) => {
                 ctrl.$setViewValue(sb);
                 ctrl.$render();
