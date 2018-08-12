@@ -24,38 +24,25 @@
 <body>
     <div class="container">
 
-        <h1>Dropdown small tree</h1>
-        <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  Dropdown
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                </ul>
-              </div>
+        <h1>Dropdown Simple Tree</h1>
 
         <div class="row">
             <div class="col-sm-6">
                 <p class="text-muted">
-                    This control extends the functionality of bootstrap dropdown control. It drops down a tree and it's useful for small trees
+                    An angularjs directive that extends the functionality of bootstrap dropdown control to show simple trees
                 </p>
                 <div ng-controller="demoController">
 
                     <ng-Dropdownsmtree ng-model="selectedSubject" parent-array="departments" parent-array-item-id-field="ID" parent-array-item-display-field="Description"
-                        child-arrays="departmentSubjects" child-arrays-item-parent-id="DepartmentID" child-arrays-item-display-field="Description" child-arrays-item-search-field="Description"
-                        control-class="form-control bordered-control" search-placeholder="Search" title-placeholder="Select Subject"   disabled="false"
-                        ></ng-Dropdownsmtree>
-                    
-                   
+                        child-arrays="departmentSubjects" child-arrays-item-parent-id="DepartmentID" child-arrays-item-display-field="Description"
+                        child-arrays-item-search-field="Description" control-class="form-control bordered-control" search-placeholder="Search"
+                        title-placeholder="Select Subject" disabled="false"></ng-Dropdownsmtree>
+
+
                     <h2>The selected subject is:</h2>
                     <p>
                         {{(selectedSubject.Description)?selectedSubject.Description:'Nothing selected yet'}}
-                    </p>    
+                    </p>
                 </div>
 
             </div>
@@ -85,7 +72,7 @@
         });
 
     </script>
-   
+
 </body>
 
 </html>
