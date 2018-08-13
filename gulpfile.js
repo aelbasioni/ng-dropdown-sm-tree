@@ -7,13 +7,18 @@ var gulp = require("gulp");
 var $ = require('gulp-load-plugins')();
 var del = require('del');
 
-/*
+
 var browserSync = require('browser-sync').create();
-browserSync.init({
-    server: "./" //the path where index.html exists
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: ["./","./src/","./dist/"]
+        }        
+    });
 });
-browserSync.stream();
-*/
+
+//browserSync.stream();
+
 var config = {
     src: {
         root: './src/',
@@ -46,10 +51,11 @@ gulp.task('css:dist', function () {
             browsers: ['last 2 versions'],
             cascade: false
         }))
-        .pipe($.concat('styles.min.css'))
+        .pipe($.concat('ng-dropdownsmtree.min.css'))
         .pipe($.cleanCss())
         .pipe($.sourcemaps.write("./"))
-        .pipe(gulp.dest(config.dist.root));
+        .pipe(gulp.dest(config.dist.root))
+        .pipe(browserSync.reload({stream: true})); // prompts a reload after compilation;
 });
 
 
@@ -64,7 +70,8 @@ gulp.task('js:dist', function () {
         .pipe($.uglify())
         .pipe($.concat('ng-dropdownsmtree.min.js'))
         .pipe($.sourcemaps.write("./"))
-        .pipe(gulp.dest(config.dist.root));
+        .pipe(gulp.dest(config.dist.root))
+        .pipe(browserSync.reload({stream: true})); // prompts a reload after compilation;
 });
 
 
@@ -74,13 +81,13 @@ gulp.task('js:dist', function () {
 gulp.task('watch', function () {    
     gulp.watch([config.src.css], ['css:dist']);
     gulp.watch([config.src.js], ['js:dist']); 
-    //gulp.watch([config.src.html]).on('change',browserSync.reload).on('error',console.error.bind(console));
+    gulp.watch([config.src.html]).on('change',browserSync.reload).on('error',console.error.bind(console));
 });
 
 gulp.task('copy:dist', ['clean','css:dist', 'js:dist']);
 
 
 //Set a default tasks
-gulp.task('default', ['copy:dist','watch'], function () {
+gulp.task('default', ['copy:dist','watch','browser-sync'], function () {
     // place code for your default task here
 });
