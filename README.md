@@ -43,4 +43,4 @@ Here's how to [contribute](https://github.com/aelbasioni/ng-dropdown-sm-tree/blo
 
 ## License
 
-The content of this repository is licensed under [MIT]()
+The content of this repository is licensed under [MIT license](https://github.com/aelbasioni/ng-dropdown-sm-tree/blob/master/LICENSE.md)
