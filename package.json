@@ -1,14 +1,22 @@
 {
-  "name": "ngDropDownTree",
+  "name": "ng-dropdownsmtree",
   "version": "1.0.0",
-  "description": "",
+  "description": "AngularJS directive for bootstrap Dropdown to open trees",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aelbasioni/ng-dropdown-sm-tree.git"
+  },
+  "author": "Asmaa El-basioni <a.elbasioni@gmail.com> (https://github.com/aelbasioni)",
+  "bugs": {
+    "url": "https://github.com/aelbasioni/ng-dropdown-sm-tree/issues"
+  },
+  "homepage": "https://github.com/aelbasioni/ng-dropdown-sm-tree#readme",
+  "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
